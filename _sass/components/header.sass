@@ -54,10 +54,15 @@
             transform: translateY(-2px)
 
     > .hero-copy > .title
-        font-size: 5.6rem
+        font-size: clamp(3.8rem, 7vw, 5.6rem)
         line-height: 0.92
         margin: 0 0 1.4rem
-        max-width: 8ch
+        max-width: none
+        white-space: nowrap
+        letter-spacing: -0.04em
+
+        @media #{$below}
+            font-size: clamp(3.2rem, 11vw, 4.4rem)
 
     > .hero-copy > .description
         font-size: 2rem
