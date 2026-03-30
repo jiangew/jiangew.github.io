@@ -2,16 +2,78 @@
 layout: page
 title: Blog
 ---
-<section class="list">
+<section class="list infinite-list" data-page-size="30">
 	{% if site.posts.size == 0 %}
 		<p class="text-center">Nothing published yet!</p>
 	{% else %}
+		{% assign blog_index = 0 %}
 		{% for post in site.posts %}
 			{% if post.category == 'blog' %}
 				{% if post.hidden != true %}
+					<div class="infinite-item" data-index="{{ blog_index }}">
 					{% include blog-post.html %}
+					</div>
+					{% assign blog_index = blog_index | plus: 1 %}
 				{% endif %}
 			{% endif %}
 		{% endfor %}
+		<div class="infinite-trigger" aria-hidden="true"></div>
+		<p class="infinite-status" hidden>Scroll for more posts</p>
 	{% endif %}
 </section>
+
+<script type="text/javascript">
+    (function () {
+        var list = document.querySelector('.infinite-list');
+        if (!list) return;
+
+        var items = Array.prototype.slice.call(list.querySelectorAll('.infinite-item'));
+        var trigger = list.querySelector('.infinite-trigger');
+        var status = list.querySelector('.infinite-status');
+        var pageSize = parseInt(list.getAttribute('data-page-size'), 10) || 30;
+        var visibleCount = pageSize;
+
+        function render() {
+            items.forEach(function (item, index) {
+                item.hidden = index >= visibleCount;
+            });
+
+            var hasMore = visibleCount < items.length;
+            if (trigger) {
+                trigger.hidden = !hasMore;
+            }
+            if (status) {
+                status.hidden = !hasMore;
+            }
+        }
+
+        function loadMore() {
+            if (visibleCount >= items.length) return;
+            visibleCount = Math.min(visibleCount + pageSize, items.length);
+            render();
+        }
+
+        render();
+
+        if (!trigger) return;
+
+        if ('IntersectionObserver' in window) {
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        loadMore();
+                    }
+                });
+            }, {
+                rootMargin: '240px 0px'
+            });
+            observer.observe(trigger);
+        } else {
+            window.addEventListener('scroll', function () {
+                if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 240)) {
+                    loadMore();
+                }
+            });
+        }
+    })();
+</script>
