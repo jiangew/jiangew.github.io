@@ -1,74 +1,70 @@
 .home,
 .blog,
 .projects
-    margin-top: 125px
+    margin-top: 6rem
 
     > .list
         border-top: 1px solid $epsilon
-        margin-top: 30px
-        padding-top: 40px
-        position: relative
-
-        &:before
-            display: block
-            content: " "
-            width: 7px
-            height: 7px
-            border: $epsilon 1px solid
-            position: absolute
-            top: -5px
-            left: 50%
-            margin-left: -5px
-            background: #FFF
-            box-shadow: #FFF 0 0 0 5px
-            border-radius: 3px
+        margin-top: 2.6rem
+        padding-top: 2.6rem
 
 .home > .list,
 .blog > .list,
 .projects > .list
     > .item
         display: block
-        width: 95%
+        width: 100%
         margin: 0 auto
+        border-bottom: 1px solid $epsilon
 
     > .item > .url
         width: 100%
-        display: block
-        padding: 20px 0
+        display: grid
+        grid-template-columns: 150px minmax(0, 1fr)
+        gap: 2rem
+        padding: 2rem 0
         text-decoration: none
+
+        @media #{$below}
+            grid-template-columns: 1fr
+            gap: 1rem
 
     > .item > .url > .title
         margin: 0
-        width: 75%
+        width: 100%
         font-weight: 500
+        font-size: 2rem
         transition: all ease-in-out .2s
 
     > .item:hover > .url > .title
         color: $delta
 
-    // maybe we can't nest html5 elements
-    // can you help me?
     aside
         position: relative
-        top: 2px
+        top: 0
         margin: 0
-        width: 25%
-        float: right
-        font-weight: 300
+        width: 100%
+        float: none
+        font-weight: 400
         color: $gama
-        text-align: right
+        text-align: left
         transition: all ease-in-out .2s
+
+        .label
+            display: block
+            margin-bottom: 0.6rem
+            font-size: 1.1rem
+            letter-spacing: 0.18em
+            text-transform: uppercase
+
+        time
+            font-size: 1.4rem
 
     .item:hover .url aside
         color: $alpha
 
 .blog > .list > .item > .url,
 .projects > .list > .item > .url
-    > .title
-        display: inline
-
+    > .title,
     > .emoji
         display: inline
-        position: relative
-        top: -4px
-        margin-right: 10px

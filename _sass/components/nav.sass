@@ -3,44 +3,44 @@
     > .list
         list-style: none
         margin: 0
-        padding: 0 13px 0
+        padding: 0
+        display: flex
+        flex-wrap: wrap
+        gap: 1rem
 
         > .item
             display: inline-block
 
         > .item > .link
             display: inline-block
-            font-weight: 300
-            font-size: 1.6rem
-            padding: 20px 10px
+            font-weight: 400
+            font-size: 1.3rem
+            letter-spacing: 0.08em
+            text-transform: uppercase
+            padding: 1rem 1.4rem
             text-decoration: none
+            border: 1px solid $epsilon
+            border-radius: 999px
+            background: rgba(99, 211, 255, 0.05)
+
+            &.active,
+            &:hover
+                color: $beta
 
 .nav
-    position: absolute
-    right: 0
-    top: 0
+    margin-bottom: 1rem
 
     > .list
-        padding: 0 13px 0
+        justify-content: flex-end
 
-        > .item > .link
-            font-size: 1.6rem
-            padding: 20px 10px
+        @media #{$below}
+            justify-content: center
 
 .nav-home
-    margin-top: 40px
-    text-align: center
+    margin-top: 2rem
 
     > .list
-        padding: 0
+        justify-content: flex-start
 
-        > .item > .link
-            font-size: 2rem
-            padding: 7px 15px
-            margin: 0
-            border-radius: 4%
-            transition: all .4s ease-in-out
-            width: 70px
-
-            &:hover
-                color: $alpha
+        @media #{$below}
+            justify-content: center

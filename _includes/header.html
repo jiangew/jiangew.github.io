@@ -7,20 +7,29 @@
 
 {% if showHeader == true %}
     <header class="header-home {% if site.animation %}animated{% endif %}">
-        {% if site.rss %}
-            <a class="link" href="{{ site.url }}/rss">
-                <img class="selfie" alt="{{ site.name }}" src="{% if site.external-image %}{{ site.picture }}{% else %}{{ site.url }}/{{ site.picture }}{% endif %}" />
-            </a>
-        {% else %}
-            <span class="link">
-                <img class="selfie" alt="{{ site.name }}" src="{% if site.external-image %}{{ site.picture }}{% else %}{{ site.url }}/{{ site.picture }}{% endif %}" />
-            </span>
-        {% endif %}
+        <div class="hero-copy">
+            <span class="eyebrow">PERSONAL TECH NOTES</span>
+            <h1 class="title">{{ site.name }}</h1>
+            <h2 class="description">{{ site.bio }}</h2>
+            <p class="intro">
+                聚焦后端架构、分布式系统与工程实践，用更克制的表达整理长期有效的技术经验。
+            </p>
+            {% include social-links.html %}
+        </div>
 
-        <h1 class="title">{{ site.name }}</h1>
-        <h2 class="description">{{ site.bio }}</h2>
+        <div class="hero-visual">
+            {% if site.rss %}
+                <a class="link" href="{{ site.url }}/rss">
+                    <img class="selfie" alt="{{ site.name }}" src="{% if site.external-image %}{{ site.picture }}{% else %}{{ site.url }}/{{ site.picture }}{% endif %}" />
+                </a>
+            {% else %}
+                <span class="link">
+                    <img class="selfie" alt="{{ site.name }}" src="{% if site.external-image %}{{ site.picture }}{% else %}{{ site.url }}/{{ site.picture }}{% endif %}" />
+                </span>
+            {% endif %}
 
-        {% include social-links.html %}
+            <div class="visual-grid"></div>
+        </div>
     </header>
 {% endif %}
 
